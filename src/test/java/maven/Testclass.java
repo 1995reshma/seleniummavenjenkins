@@ -3,6 +3,7 @@ package maven;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -22,7 +23,17 @@ public class Testclass {
 	public void setup() {
 		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\reshm\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--no-sandbox");
+		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--disable-extensions");
+		options.addArguments("--headless");
+		options.addArguments("--disable-gpu");
+		options.addArguments("--disable-software-rasterizer");
+		options.addArguments("--disable-web-security");
+		options.addArguments("--disable-features=IsolateOrigins,site-per-process");
+		options.addArguments("--window-size=1920x1080");
+		driver = new ChromeDriver(options);
 		driver.get("http://www.automationpractice.pl/index.php?controller=authentication&back=my-account");
 
 	}
